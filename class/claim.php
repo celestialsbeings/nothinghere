@@ -39,7 +39,7 @@ Expiry Date: <code>$expiryDate</code>
         ]);
         error_log("Username value: " . $username); 
         error_log("File path: " . 'database/paid.txt');  
-        $userInfo = "User ID: $userId\nUsername: @$username\nRank: $rank\nExpiry Date: $expiryDate\n";
+        $userInfo = "User ID: $userId\nRank: $rank\nExpiry Date: $expiryDate\nUsername: @$username\n";
         file_put_contents('database/paid.txt', $userInfo, FILE_APPEND);
     
     } else {

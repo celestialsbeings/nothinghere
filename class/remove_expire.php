@@ -11,19 +11,19 @@ $updatedPaidData = '';
 
 // Iterate through each user entry
 foreach ($entries as $entry) {
-  preg_match("/User ID: (\d+)\nUsername: @(.+)\nRank: (.+)\nExpiry Date: (\d{4}-\d{2}-\d{2})/", $entry, $matches);
+  preg_match("/User ID: (\d+)\nRank: (.+)\nExpiry Date: (\d{4}-\d{2}-\d{2})\nUsername: @(.+)/", $entry, $matches);
 
   if (count($matches) === 5) { 
-    $userId = $matches[1];
-    $username = $matches[2]; // Capture username
-    $rank = $matches[3];
-    $expiryDate = $matches[4];
+    $userId = $matches[1]; // Capture username
+    $rank = $matches[2];
+    $expiryDate = $matches[3];
+    $username = $matches[4];
 
     if (strtotime($currentDate) > strtotime($expiryDate)) {
       continue;
     }
 
-    $updatedPaidData .= "User ID: $userId\nUsername: @$username\nRank: $rank\nExpiry Date: $expiryDate\n\n";
+    $updatedPaidData .= "User ID: $userId\nRank: $rank\nExpiry Date: $expiryDate\nUsername: @$username\n\n";
   }
 }
 
