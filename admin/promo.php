@@ -4,20 +4,14 @@ $ownerData = file_get_contents('database/owner.txt');
 $authorizedUserIds = explode("\n", $ownerData);
 
 // 2. Get the incoming message, check authorization
-$update = json_decode(file_get_contents('php://input'), true);
-$chat_id = $update['message']['chat']['id'];
-$messageText = $update['message']['text'];
-$userId = $update['message']['from']['id']; // Get the sender's user ID
+// $userId = $update['message']['from']['id']; 
 
 $userIdFile = "database/users.txt";
 
 // 3. Get the incoming message from Telegram
-$update = json_decode(file_get_contents('php://input'), true);
-$chat_id = $update['message']['chat']['id'];
-$messageText = $update['message']['text'];
 
 // 4. Check if the message starts with the trigger
-if (strpos($text, "/broadcast") === 0 || strpos($text, "!broadcast") === 0 || strpos($text, ".broadcast") === 0){
+if (strpos($text, "/brd") === 0 || strpos($text, "!brd") === 0 || strpos($text, ".brd") === 0){
   if (!in_array("$userId", $authorizedUserIds)) {
 
       bot('sendMessage', [
@@ -37,7 +31,7 @@ if (strpos($text, "/broadcast") === 0 || strpos($text, "!broadcast") === 0 || st
   return;
   }
     // Extract the actual message to be sent
-    $broadcastMessage = substr($messageText, 10);
+    $broadcastMessage = substr($message, 4);
 
     // 5. Load user IDs from the file
     if (file_exists($userIdFile)) {
